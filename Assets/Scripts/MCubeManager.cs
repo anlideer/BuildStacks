@@ -6,14 +6,15 @@ public class MCubeManager : MonoBehaviour
 {
     public static MovingCube CurrentCube { get; private set; }
     public static Vector3 LastPosition { get; set; }
-    public static float lastWidth;
-    public static bool isZ = true;
+    public static float LastWidth { get; set; }
+    public static bool IsZ { get; set; }
 
     private void Start()
     {
         LastPosition = new Vector3(0, 0.45f, 0);
-        lastWidth = 1f;
+        LastWidth = 1f;
         SpawnCube(new Vector3(1f, 0.1f, 1f));
+        IsZ = true;
     }
 
     public static void SpawnCube(Vector3 scale)
@@ -21,7 +22,7 @@ public class MCubeManager : MonoBehaviour
         GameObject obj = Instantiate(Resources.Load("MovingCube") as GameObject);
         MovingCube mc = obj.GetComponent<MovingCube>();
         Debug.Log("Lastposition" + LastPosition);
-        if (isZ)
+        if (IsZ)
         {
             scale.z = scale.x;
             obj.transform.localScale = scale;
@@ -39,6 +40,6 @@ public class MCubeManager : MonoBehaviour
         }
 
         CurrentCube = mc;
-        isZ = !isZ;
+        IsZ = !IsZ;
     }
 }
