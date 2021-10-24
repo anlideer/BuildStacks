@@ -22,5 +22,9 @@ public class ScoreText : MonoBehaviour
     private void OnScoreChange()
     {
         text.text = "Score: " + GameManager.Score;
+        if (GameManager.IsEnd)
+        {
+            text.text += ", Press any key to restart.";
+        }
     }
 }

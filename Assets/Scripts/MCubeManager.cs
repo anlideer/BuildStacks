@@ -9,12 +9,12 @@ public class MCubeManager : MonoBehaviour
     public static float LastWidth { get; set; }
     public static bool IsZ { get; set; }
 
-    private void Start()
+    public static void Reset()
     {
         LastPosition = new Vector3(0, 0.45f, 0);
         LastWidth = 1f;
-        SpawnCube(new Vector3(1f, 0.1f, 1f));
         IsZ = true;
+        SpawnCube(new Vector3(1f, 0.1f, 1f));
     }
 
     public static void SpawnCube(Vector3 scale)

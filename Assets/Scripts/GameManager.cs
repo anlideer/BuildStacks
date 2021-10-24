@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +14,12 @@ public class GameManager : MonoBehaviour
             OnScoreUpdated();
         }
     }
-    public static bool IsEnd { get; set; }
+    public static bool _isEnd;
+    public static bool IsEnd
+    {
+        get { return _isEnd; }
+        set { _isEnd = value; OnScoreUpdated(); }
+    }
     public static event Action OnScoreUpdated = delegate { };
 
     private void Start()
@@ -41,7 +45,15 @@ public class GameManager : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
+            GameObject[] cubes = GameObject.FindGameObjectsWithTag("MovingCube");
+            foreach(GameObject cube in cubes)
+            {
+                Destroy(cube);
+            }
+            Debug.Log("Destroy all cubes");
             IsEnd = false;
+            MCubeManager.Reset();
+            Score = 0;
         }
     }
 
